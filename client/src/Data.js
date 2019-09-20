@@ -3,6 +3,7 @@ import config from "./config";
 
 //this is how the client will talk to the API
 //create, sign up and authenticate a user
+
 export default class Data {
   //make the GET and POST requests to the REST API
   api(
@@ -25,6 +26,7 @@ export default class Data {
       options.body = JSON.stringify(body);
     }
 
+    //check if auth required
     if (requiresAuth) {
       const encodedCredentials = btoa(
         `${credentials.username}:${credentials.password}`

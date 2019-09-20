@@ -1,10 +1,17 @@
 // D A T A   A C C E S S I B I L I T Y
 import React, { Component } from "react";
+import Cookies from "js-cookie";
 import Data from "./Data";
+
+const Context = React.createContext();
 
 //make the Data API methods available throughout the app
 
-export class Context extends Component {
+export class Provider extends Component {
+  state = {
+    authenticatedUser: Cookies.getJSON("authenticatedUser") || null
+  };
+
   //initialise a new instance of data
   constructor() {
     super();
@@ -13,6 +20,7 @@ export class Context extends Component {
 
   render() {
     const { authenticatedUser } = this.state;
+    console.log(authenticatedUser);
     const value = {
       authenticatedUser,
       data: this.data,
@@ -27,6 +35,28 @@ export class Context extends Component {
       <Context.Provider value={value}>{this.props.children}</Context.Provider>
     );
   }
+
+  //GET req on protected /user (find on server, return data to client)
+  signIn = async (username, password) => {
+    const user = await this.data.getUser(username, password);
+    if (user !== null) {
+      this.setState(() => {
+        return {
+          authenticatedUser: user
+        };
+      });
+      const cookieOptions = {
+        expires: 1 // 1 day
+      };
+      Cookies.set("authenticatedUser", JSON.stringify(user), { cookieOptions });
+    }
+    return user;
+  };
+
+  signOut = () => {
+    this.setState({ authenticatedUser: null });
+    Cookies.remove("authenticatedUser");
+  };
 }
 
 export const Consumer = Context.Consumer;

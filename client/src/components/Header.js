@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 //Check if user is authenticated in or not
 //Context passed in from Context.js
 
-class Header extends React.PureComponent {
+export default class Header extends React.PureComponent {
   render() {
-    const { context } = this.props;
-    const authUser = context.authenticatedUser;
+    const { Context } = this.props;
+    const authUser = "Context.authenticatedUser";
+
     return (
       <div className="header">
         <div className="bounds">
@@ -34,5 +35,3 @@ class Header extends React.PureComponent {
     );
   }
 }
-
-export default Header;
