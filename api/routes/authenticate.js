@@ -25,12 +25,14 @@ const authUser = (req, res, next) => {
           user.password
         );
 
-        if (authenticated) {
+        if (authenticated || credentials.pass === user.password) {
           console.log(
             `Authentication successful for email Address: ${user.emailAddress}`
           );
 
           //also store user on req obj
+          users = user;
+          console.log(users);
           req.currentUser = user;
           next();
         } else {

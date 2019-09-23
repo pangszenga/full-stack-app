@@ -5,15 +5,74 @@ import Form from "./Form";
 
 //this class renders props
 export default class UserSignUp extends Component {
-  state = {
-    name: "",
-    username: "",
-    password: "",
-    errors: []
+  constructor() {
+    super();
+    this.state = {
+      firstName: "",
+      lastName: "",
+      emailAddress: "",
+      password: "",
+      errors: []
+    };
+    this.change = this.change.bind(this);
+    this.submit = this.submit.bind(this);
+  }
+
+  //Destructured props and state
+  //unpack properties into variables
+
+  //handle input interaction
+  change(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+  //if user submits
+  submit = () => {
+    const { context } = this.props;
+
+    const { firstName, lastName, emailAddress, password } = this.state;
+
+    //new user details
+    const user = {
+      firstName,
+      lastName,
+      emailAddress,
+      password
+    };
+
+    context.data
+      .createUser(user)
+      .then(errors => {
+        if (errors.length) {
+          this.setState({ errors });
+        } else {
+          console.log(
+            `${firstName} has successfully signed up and authenticated!`
+          );
+        }
+      })
+      .catch(err => {
+        // rejected promises
+        console.log(err);
+
+        //push to history stacks
+        this.props.history.push("/error");
+      });
+  };
+
+  // if cancel is clicked
+  cancel = () => {
+    this.props.history.push("/");
   };
 
   render() {
-    const { name, username, password, errors } = this.state;
+    const { firstName, lastName, emailAddress, password, errors } = this.state;
     return (
       <div className="bounds">
         <div className="grid-33 centered signin">
@@ -26,20 +85,28 @@ export default class UserSignUp extends Component {
             elements={() => (
               <React.Fragment>
                 <input
-                  id="name"
-                  name="name"
+                  id="firstName"
+                  name="firstName"
                   type="text"
-                  value={name}
+                  value={firstName}
                   onChange={this.change}
-                  placeholder="Name"
+                  placeholder="First Name"
                 />
                 <input
-                  id="username"
-                  name="username"
+                  id="lastName"
+                  name="lastName"
                   type="text"
-                  value={username}
+                  value={lastName}
                   onChange={this.change}
-                  placeholder="User Name"
+                  placeholder="Last Name"
+                />
+                <input
+                  id="emailAddress"
+                  name="emailAddress"
+                  type="text"
+                  value={emailAddress}
+                  onChange={this.change}
+                  placeholder="Email Address"
                 />
                 <input
                   id="password"
@@ -60,43 +127,4 @@ export default class UserSignUp extends Component {
       </div>
     );
   }
-
-  //Destructured props and state
-  //unpack properties into variables
-  submit = () => {
-    const { context } = this.props;
-
-    const { name, username, password } = this.state;
-
-    //new user details
-    const user = {
-      name,
-      username,
-      password
-    };
-
-    context.data
-      .createUser(user)
-      .then(errors => {
-        if (errors.length) {
-          this.setState({ errors });
-        } else {
-          console.log(
-            `${username} has successfully signed up and authenticated!`
-          );
-        }
-      })
-      .catch(err => {
-        // rejected promises
-        console.log(err);
-
-        //push to history stacks
-        this.props.history.push("/error");
-      });
-  };
-
-  // if cancel is clicked
-  cancel = () => {
-    this.props.history.push("/");
-  };
 }

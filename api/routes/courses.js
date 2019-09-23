@@ -7,6 +7,7 @@ const bcryptjs = require("bcryptjs");
 const auth = require("basic-auth");
 const { check, validationResult } = require("express-validator");
 const authUser = require("./authenticate");
+const cors = require("cors");
 
 /* ROUTES */
 
@@ -20,7 +21,7 @@ router.get("/", (req, res, next) => {
 
 //GET /:id 200 - returns course that belongs to use, if course id is provided
 
-router.get("/:id", (req, res, next) => {
+router.get("/:id", cors(), (req, res, next) => {
   // find the course that matches the course id, filter out createdAt and updatedAt
   Course.findOne({
     where: {

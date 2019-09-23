@@ -17,7 +17,7 @@ export default props => {
     cancel();
   }
 
-  //errors
+  //validation errors
   function ErrorsDisplay({ errors }) {
     let errorsDisplay = null;
 

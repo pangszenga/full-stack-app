@@ -20,10 +20,11 @@ export class Provider extends Component {
 
   render() {
     const { authenticatedUser } = this.state;
-    console.log(authenticatedUser);
+    // console.log(authenticatedUser);
     const value = {
       authenticatedUser,
       data: this.data,
+      //add action to properties and objects
       actions: {
         signIn: this.signIn,
         signOut: this.signOut
@@ -36,19 +37,28 @@ export class Provider extends Component {
     );
   }
 
-  //GET req on protected /user (find on server, return data to client)
-  signIn = async (username, password) => {
-    const user = await this.data.getUser(username, password);
+  //GET req on protected /user
+  //find on server, return data to client
+  signIn = async (emailAddress, password) => {
+    const user = await this.data.getUser(emailAddress, password);
     if (user !== null) {
       this.setState(() => {
         return {
-          authenticatedUser: user
+          authenticatedUser: { user }
         };
       });
+
       const cookieOptions = {
         expires: 1 // 1 day
       };
-      Cookies.set("authenticatedUser", JSON.stringify(user), { cookieOptions });
+
+      Cookies.set(
+        "authenticatedUser",
+        JSON.stringify({ user }),
+        {
+          cookieOptions
+        } + ""
+      );
     }
     return user;
   };

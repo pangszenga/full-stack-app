@@ -24,7 +24,7 @@ app.use(express.json());
 
 // app usage
 app.use(morgan("dev"));
-app.use(cors());
+app.use(cors({ origin: "http://localhost:3000" }));
 
 // check database connection
 sequelize

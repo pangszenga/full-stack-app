@@ -1,6 +1,7 @@
 // H E L P E R  C L A S S
+import React from "react";
 import config from "./config";
-
+import { Redirect } from "react-router-dom";
 //this is how the client will talk to the API
 //create, sign up and authenticate a user
 
@@ -41,6 +42,7 @@ export default class Data {
       username,
       password
     });
+
     if (response.status === 200) {
       return response.json().then(data => data);
     } else if (response.status === 401) {
@@ -58,6 +60,63 @@ export default class Data {
       return response.json().then(data => {
         return data.errors;
       });
+    } else {
+      throw new Error();
+    }
+  }
+  //POST req - /courses/create
+  async createCourse(emailAddress, password, course) {
+    const response = await this.api("/courses", "POST", course, true, {
+      emailAddress,
+      password
+    });
+
+    if (response.status === 201) {
+      return [];
+    } else if (response.status === 400) {
+      return response.json().then(data => {
+        return data.errors;
+      });
+    } else if (response.status === 401) {
+      return <Redirect to="/forbidden" />;
+    } else if (response.status === 500) {
+      return <Redirect to="/error" />;
+    } else {
+      throw new Error();
+    }
+  }
+  //PUT req - /courses/:id
+  async updateCourse(emailAddress, password, course, id) {
+    const response = await this.api(`/courses/${id}`, "PUT", course, true, {
+      emailAddress,
+      password
+    });
+
+    if (response.status === 204) {
+      return [];
+    } else if (response.status === 400) {
+      return response.json().then(data => {
+        return data.errors;
+      });
+    } else if (response.status === 401) {
+      return null;
+    } else if (response.status === 500) {
+      return <Redirect to="/error" />;
+    } else {
+      throw new Error();
+    }
+  }
+  //DELETE req - /courses/delete
+  async deleteCourse(emailAddress, password, id) {
+    const response = await this.api(`/courses/${id}`, "DELETE", null, true, {
+      emailAddress,
+      password
+    });
+
+    if (response.status === 204) {
+      return [];
+    } else if (response.status === 500) {
+      return <Redirect to="/error" />;
     } else {
       throw new Error();
     }
