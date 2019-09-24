@@ -11,6 +11,11 @@ const authUser = require("./authenticate");
 //GET / - 200
 
 router.get("/", authUser, (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors });
+  }
+
   console.log(req.currentUser);
   const user = req.currentUser;
 
@@ -47,8 +52,10 @@ router.post(
     // Finds the validation errors in this request and wraps them in an object with handy functions
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      console.log(errors);
+      return res.status(400).json({ errors: errors });
     }
+
     let newUser = req.body;
     console.log("here " + newUser.emailAddress);
 

@@ -9,7 +9,8 @@ const Context = React.createContext();
 
 export class Provider extends Component {
   state = {
-    authenticatedUser: Cookies.getJSON("authenticatedUser") || null
+    authenticatedUser: Cookies.getJSON("authenticatedUser") || null,
+    courses: [0]
   };
 
   //initialise a new instance of data

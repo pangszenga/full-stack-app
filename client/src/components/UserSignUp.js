@@ -35,7 +35,6 @@ export default class UserSignUp extends Component {
   //if user submits
   submit = () => {
     const { context } = this.props;
-
     const { firstName, lastName, emailAddress, password } = this.state;
 
     //new user details
@@ -49,19 +48,24 @@ export default class UserSignUp extends Component {
     context.data
       .createUser(user)
       .then(errors => {
-        if (errors.length) {
-          this.setState({ errors });
+        if (errors.errors) {
+          console.log(errors.errors);
+          this.setState({ errors: errors.errors });
         } else {
-          console.log(
-            `${firstName} has successfully signed up and authenticated!`
-          );
+          //if there are no errors
+
+          //sign user in
+
+          let emailAddress = this.state.emailAddress;
+          let password = this.state.password;
+
+          context.actions.signIn(emailAddress, password).then(() => {
+            this.props.history.push("/");
+          });
         }
       })
       .catch(err => {
-        // rejected promises
-        console.log(err);
-
-        //push to history stacks
+        console.error(err);
         this.props.history.push("/error");
       });
   };

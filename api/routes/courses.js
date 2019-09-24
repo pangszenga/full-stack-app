@@ -43,8 +43,10 @@ router.get("/:id", cors(), (req, res, next) => {
     ]
   }).then(course => {
     //if this (singular) course is found
-    if (course) {
-      //do this
+    //checks if the resources does not exist
+    if (course.length === 0) {
+      return res.status(404).json({});
+    } else if (course) {
       res.status(200).json({ course });
     } else {
       const err = new Error(
@@ -78,7 +80,7 @@ router.post(
     // Finds the validation errors in this request and wraps them in an object with handy functions
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ errors: errors });
     }
 
     let newCourse = req.body;
@@ -116,7 +118,7 @@ router.put(
     // Finds the validation errors in this request and wraps them in an object with handy functions
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ errors: errors });
     }
 
     //find current userId

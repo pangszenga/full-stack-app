@@ -28,13 +28,15 @@ export default props => {
           <div className="validation-errors">
             <ul>
               {errors.map((error, i) => (
-                <li key={i}>{error}</li>
+                <li key={i}>{error.msg}</li>
               ))}
             </ul>
           </div>
         </div>
       );
     }
+    console.log(errors);
+
     return errorsDisplay;
   }
 

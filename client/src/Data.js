@@ -30,16 +30,16 @@ export default class Data {
     //check if auth required
     if (requiresAuth) {
       const encodedCredentials = btoa(
-        `${credentials.username}:${credentials.password}`
+        `${credentials.emailAddress}:${credentials.password}`
       );
       options.headers["Authorization"] = `Basic ${encodedCredentials}`;
     }
     return fetch(url, options);
   }
   //GET req - /users
-  async getUser(username, password) {
+  async getUser(emailAddress, password) {
     const response = await this.api(`/users`, "GET", null, true, {
-      username,
+      emailAddress,
       password
     });
 
@@ -58,6 +58,7 @@ export default class Data {
       return [];
     } else if (response.status === 400) {
       return response.json().then(data => {
+        console.log(data.errors);
         return data.errors;
       });
     } else {
@@ -75,6 +76,7 @@ export default class Data {
       return [];
     } else if (response.status === 400) {
       return response.json().then(data => {
+        console.log(data.errors);
         return data.errors;
       });
     } else if (response.status === 401) {
@@ -107,14 +109,19 @@ export default class Data {
     }
   }
   //DELETE req - /courses/delete
-  async deleteCourse(emailAddress, password, id) {
+  async delete(emailAddress, password, id) {
     const response = await this.api(`/courses/${id}`, "DELETE", null, true, {
       emailAddress,
       password
     });
 
+    console.log(emailAddress);
+
     if (response.status === 204) {
       return [];
+    } else if (response.status === 401) {
+      console.log("401");
+      return null;
     } else if (response.status === 500) {
       return <Redirect to="/error" />;
     } else {
