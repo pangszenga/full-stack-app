@@ -66,3 +66,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### This project is running on 2 ports - 5000 (API) and 3000 (Client)
+
+User npm run in API and Client to see the interaction between the two
