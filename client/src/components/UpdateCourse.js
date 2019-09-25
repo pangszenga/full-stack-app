@@ -30,7 +30,7 @@ export default class UpdateCourse extends Component {
               isLoading: false
             };
           } else {
-            console.error(res.errors.errors.message);
+            //if trying to update course that doesnt exist, push notFound
             return this.props.history.push("/notfound");
           }
         })
@@ -70,6 +70,7 @@ export default class UpdateCourse extends Component {
       .updateCourse(emailAddress, password, updatedCourse, courseId)
       .then(errors => {
         if (errors.errors) {
+          //validation errors
           console.log(errors.errors);
           this.setState({
             errors: errors.errors

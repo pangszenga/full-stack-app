@@ -13,7 +13,7 @@ import UserSignUp from "./components/UserSignUp";
 import UserSignIn from "./components/UserSignIn";
 import UserSignOut from "./components/UserSignOut";
 import NotFound from "./components/NotFound";
-import Error from "./components/Error";
+import Error from "./components/UnhandledError";
 import Forbidden from "./components/Forbidden";
 // import Authenticated from "./components/Authenticated";
 import PrivateRoute from "./PrivateRoute";

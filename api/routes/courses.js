@@ -44,7 +44,8 @@ router.get("/:id", cors(), (req, res, next) => {
   }).then(course => {
     //if this (singular) course is found
     //checks if the resources does not exist
-    if (course.length === 0) {
+    console.log(course);
+    if (course === null) {
       return res.status(404).json({});
     } else if (course) {
       res.status(200).json({ course });

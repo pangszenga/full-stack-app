@@ -14,7 +14,10 @@ export default class CourseDetail extends Component {
       .then(res => res.json())
       .then(res => {
         //check if page exist
-        if (res.status === 404) {
+        console.log(res);
+
+        if (!res.course) {
+          //is the response does not contain courses, push notFound
           this.props.history.push("/notfound");
         }
 
@@ -31,6 +34,19 @@ export default class CourseDetail extends Component {
           }
         });
       })
+
+      //   if (res.course) {
+      //     console.log(res.course);
+      //     return {
+      //       data: res,
+      //       isLoading: false
+      //     };
+      //   } else {
+      //     console.log(res.errors);
+      //     return this.props.history.push("/notfound");
+      //   }
+      // })
+
       .catch(err => {
         console.error(err);
         this.props.history.push("/error");

@@ -201,7 +201,7 @@ svg {
 
 /* line 5, ../sass/global.sass */
 body {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Cantarell", "Work Sans", sans-serif;
   background: #fff;
 }
 
@@ -214,7 +214,8 @@ body {
 /* line 17, ../sass/global.sass */
 .header--logo {
   color: #fff;
-  font-size: 24px;
+  font-size: 30px;
+  font-weight: bold;
   padding: 0 15px;
   margin: 0;
   display: inline-block;
@@ -261,7 +262,8 @@ body {
   margin-top: -30px;
 }
 /* line 2, ../sass/mixins.sass */
-.actions--bar:before, .actions--bar:after {
+.actions--bar:before,
+.actions--bar:after {
   content: " ";
   display: table;
 }
@@ -305,7 +307,11 @@ p {
 }
 
 /* line 74, ../sass/global.sass */
-.grid, .grid-25, .grid-33, .grid-66, .grid-100 {
+.grid,
+.grid-25,
+.grid-33,
+.grid-66,
+.grid-100 {
   float: left;
   padding: 0 15px;
   box-sizing: border-box;
@@ -349,7 +355,8 @@ p {
   box-sizing: border-box;
 }
 /* line 2, ../sass/mixins.sass */
-.course--module:before, .course--module:after {
+.course--module:before,
+.course--module:after {
   content: " ";
   display: table;
 }
@@ -365,7 +372,7 @@ p {
 }
 /* line 116, ../sass/global.sass */
 .course--label {
-  font-family: "Cousine";
+  font-family: "Cantarell";
   font-size: 14px;
   font-weight: 100;
   color: rgba(255, 255, 255, 0.5);
@@ -478,7 +485,8 @@ p {
   font-family: "Cousine";
 }
 /* line 2, ../sass/mixins.sass */
-.course--description li:before, .course--description li:after {
+.course--description li:before,
+.course--description li:after {
   content: " ";
   display: table;
 }

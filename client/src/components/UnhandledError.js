@@ -5,9 +5,9 @@ export default () => {
   return (
     <div className="bounds">
       <div className="grid-66">
-        <h1>Forbidden</h1>
+        <h1>Unhandled Error</h1>
         <p>
-          Oh oh! You can't access this page. <br />
+          Sorry! We just encountered an unexpected error. <br />
           Click below to return home <br />
         </p>
         <Link className="button button-secondary" to="/">
