@@ -14,8 +14,6 @@ export default class CourseDetail extends Component {
       .then(res => res.json())
       .then(res => {
         //check if page exist
-        console.log(res);
-
         if (!res.course) {
           //is the response does not contain courses, push notFound
           this.props.history.push("/notfound");
@@ -34,19 +32,6 @@ export default class CourseDetail extends Component {
           }
         });
       })
-
-      //   if (res.course) {
-      //     console.log(res.course);
-      //     return {
-      //       data: res,
-      //       isLoading: false
-      //     };
-      //   } else {
-      //     console.log(res.errors);
-      //     return this.props.history.push("/notfound");
-      //   }
-      // })
-
       .catch(err => {
         console.error(err);
         this.props.history.push("/error");
@@ -89,7 +74,7 @@ export default class CourseDetail extends Component {
 
     if (!this.state.isLoading) {
       //check if course belongs to user
-      if (authUser.user.id === this.state.data.course.userId) {
+      if (authUser && authUser.user.id === this.state.data.course.userId) {
         //if user is logged in, allow user to update and delete course
         //add buttons if user has access
         btn = (
@@ -105,6 +90,8 @@ export default class CourseDetail extends Component {
             </button>
           </span>
         );
+      } else {
+        this.props.history.push("/signin");
       }
 
       rendered = (
