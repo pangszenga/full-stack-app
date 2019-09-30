@@ -296,7 +296,7 @@ a {
 
 /* line 66, ../sass/global.sass */
 p {
-  font-family: "Cousine";
+  font-family: "Cantarell";
   margin-bottom: 30px;
 }
 
@@ -522,7 +522,7 @@ p {
 .course--description h1,
 .course--description h2,
 .course--description h3 {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Cantarell", sans-serif;
   color: #222;
   margin-bottom: 30px;
 }
@@ -548,7 +548,7 @@ p {
 }
 /* line 287, ../sass/global.sass */
 .course--stats--list h4 {
-  font-family: "Cousine";
+  /* font-family: "Cousine"; */
   font-weight: 100;
   color: #999;
   font-size: 14px;

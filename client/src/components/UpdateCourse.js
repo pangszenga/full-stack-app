@@ -87,7 +87,9 @@ export default class UpdateCourse extends Component {
 
   //if cancel is clicked
   cancel = () => {
-    this.props.history.push("/");
+    const courseId = this.props.match.params.id;
+
+    this.props.history.push(`/courses/${courseId}`);
   };
 
   render() {
