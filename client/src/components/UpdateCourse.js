@@ -142,7 +142,7 @@ export default class UpdateCourse extends Component {
                         <textarea
                           id="description"
                           name="description"
-                          className="descriptionq"
+                          className="description"
                           onChange={this.change}
                           value={description}
                         />
@@ -171,7 +171,7 @@ export default class UpdateCourse extends Component {
                             <textarea
                               id="materialsNeeded"
                               name="materialsNeeded"
-                              className=""
+                              placeholder="* <item> "
                               onChange={this.change}
                               value={materialsNeeded}
                             />

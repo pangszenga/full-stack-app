@@ -74,20 +74,24 @@ export default class CourseDetail extends Component {
 
     if (!this.state.isLoading) {
       //check if course belongs to user
-      // if (authUser && authUser.user.id === this.state.data.course.userId) {
-      //   //if user is logged in, allow user to update and delete course
-      //   //add buttons if user has access
-      btn = (
-        <span>
-          <Link className="button" to={`/courses/${this.state.id}/update`}>
-            Update Course
-          </Link>
-          <button className="button" onClick={() => this.delete(this.state.id)}>
-            Delete Course
-          </button>
-        </span>
-      );
-      // } else {
+      if (authUser && authUser.user.id === this.state.data.course.userId) {
+        //if user is logged in, allow user to update and delete course
+        //add buttons if user has access
+        btn = (
+          <span>
+            <Link className="button" to={`/courses/${this.state.id}/update`}>
+              Update Course
+            </Link>
+            <button
+              className="button"
+              onClick={() => this.delete(this.state.id)}
+            >
+              Delete Course
+            </button>
+          </span>
+        );
+      }
+      //else {
       //   this.props.history.push("/signin");
       // }
 
@@ -98,19 +102,22 @@ export default class CourseDetail extends Component {
               <h4 className="course--label">Course</h4>
               <h3 className="course--title">{this.state.data.course.title}</h3>
               <p>
-                By: {this.state.data.course.User.firstName}{" "}
+                By {this.state.data.course.User.firstName}{" "}
                 {this.state.data.course.User.lastName}
               </p>
             </div>
+
             <div className="course--description">
               <p>{this.state.data.course.description}</p>
             </div>
           </div>
+
           <div className="grid-25 grid-right">
             <div className="course--stats">
               <ul className="course--stats--list">
                 <li className="course--stats--list--item">
                   <h4>Estimated Time</h4>
+
                   {this.state.data.course.estimatedTime ? (
                     <h3>{this.state.data.course.estimatedTime}</h3>
                   ) : (
@@ -119,23 +126,24 @@ export default class CourseDetail extends Component {
                 </li>
                 <li className="course--stats--list--item">
                   <h4>Materials Needed</h4>
-                  <ul>
-                    {this.state.data.course.materialsNeeded ? (
+
+                  {this.state.data.course.materialsNeeded ? (
+                    <ul>
                       <li>
                         {this.state.data.course.materialsNeeded
                           .split("*")
                           .map((mat, i) => {
                             if (i !== 0) {
-                              return <li key={i}>{mat}</li>;
+                              return <li key={i}> {mat}</li>;
                             } else {
                               return null;
                             }
                           })}
                       </li>
-                    ) : (
-                      <h3>Data Unavailable</h3>
-                    )}
-                  </ul>
+                    </ul>
+                  ) : (
+                    <h3>Data Unavailable</h3>
+                  )}
                 </li>
               </ul>
             </div>

@@ -3,8 +3,8 @@
 const express = require("express");
 const router = express.Router();
 const { Course, User } = require("../models");
-const bcryptjs = require("bcryptjs");
-const auth = require("basic-auth");
+// const bcryptjs = require("bcryptjs");
+// const auth = require("basic-auth");
 const { check, validationResult } = require("express-validator");
 const authUser = require("./authenticate");
 const cors = require("cors");
