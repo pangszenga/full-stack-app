@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import config from "../config";
+const ReactMarkdown = require("react-markdown");
 
 export default class CourseDetail extends Component {
   state = {
@@ -108,7 +109,9 @@ export default class CourseDetail extends Component {
             </div>
 
             <div className="course--description">
-              <p>{this.state.data.course.description}</p>
+              <div className="no-top-border">
+                <ReactMarkdown source={this.state.data.course.description} />
+              </div>
             </div>
           </div>
 
@@ -129,17 +132,9 @@ export default class CourseDetail extends Component {
 
                   {this.state.data.course.materialsNeeded ? (
                     <ul>
-                      <li>
-                        {this.state.data.course.materialsNeeded
-                          .split("*")
-                          .map((mat, i) => {
-                            if (i !== 0) {
-                              return <li key={i}> {mat}</li>;
-                            } else {
-                              return null;
-                            }
-                          })}
-                      </li>
+                      <ReactMarkdown
+                        source={this.state.data.course.materialsNeeded}
+                      />
                     </ul>
                   ) : (
                     <h3>Data Unavailable</h3>
