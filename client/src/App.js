@@ -34,7 +34,11 @@ const UpdateCourseWithContext = withContext(UpdateCourse);
 export default () => (
   <Router>
     <div>
-      <HeaderWithContext />
+      <Route
+        render={({ location }) => (
+          <HeaderWithContext location={location.pathname} />
+        )}
+      />
 
       <Switch>
         <Route exact path="/" component={Courses} />

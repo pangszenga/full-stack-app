@@ -45,7 +45,8 @@ export class Provider extends Component {
     if (user !== null) {
       this.setState(() => {
         return {
-          authenticatedUser: { user }
+          authenticatedUser: { user },
+          password: password
         };
       });
 

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import config from "../config";
 import Form from "./Form";
 import { Redirect } from "react-router-dom";
-const ReactMarkdown = require("react-markdown");
 
 export default class UpdateCourse extends Component {
   //state of props that will be updated in the form for updating the course

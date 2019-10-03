@@ -45,6 +45,10 @@ export default class UserSignUp extends Component {
       password
     };
 
+    const { from } = this.props.location.state || {
+      from: { pathname: "/" }
+    };
+
     context.data
       .createUser(user)
       .then(errors => {
@@ -60,7 +64,7 @@ export default class UserSignUp extends Component {
           let password = this.state.password;
 
           context.actions.signIn(emailAddress, password).then(() => {
-            this.props.history.push("/");
+            this.props.history.push(from);
           });
         }
       })

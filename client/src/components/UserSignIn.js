@@ -67,6 +67,7 @@ export default class UserSignIn extends Component {
     const { from } = this.props.location.state || {
       from: { pathname: "/" }
     };
+    // const { from } = this.props.location.state;
     const { emailAddress, password } = this.state;
 
     context.actions
@@ -77,6 +78,7 @@ export default class UserSignIn extends Component {
             return { errors: ["Sign-in was unsuccessful"] };
           });
         } else {
+          //if successful redirect user to previous location
           this.props.history.push(from);
           console.log(`Success! ${emailAddress} is signed in!`);
         }
